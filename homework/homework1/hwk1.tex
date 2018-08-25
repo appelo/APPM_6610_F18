@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsmath}
+\usepackage{amssymb,verbatim}
+\thispagestyle{empty}
+
+\usepackage{graphicx,amsmath,color,amssymb}
+\usepackage{psfrag,picture}
+
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bd}{\begin{displaymath}}
+\newcommand{\ed}{\end{displaymath}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bn}{\begin{enumerate}}
+\newcommand{\en}{\end{enumerate}}
+\newcommand{\pa}{\partial}
+\newcommand{\f}{\frac}
+\newcommand{\ci}{\cite}
+\newcommand{\eps}{\epsilon}
+\newcommand{\del}{\delta}
+%\newcommand{\cal}{\mathcal}
+\newtheorem{lem}{Lemma}
+\newtheorem{truth}{Theorem}
+\newtheorem{prob}{Problem}
+\newtheorem{corl}{Corollary}
+\newtheorem{rem}{Remark}
+\newcommand{\dbl}{[[}
+\newcommand{\dbr}{]]}
+\newcommand{\dsl}{\{\{}
+\newcommand{\dsr}{\}\}} 
+
+\begin{document}
+\begin{center}
+\textbf{APPM 6610 --- HOMEWORK  \# 1\hfill Due: August 31 in class}
+\end{center}
+
+\begin{center}
+{\bf Finite Difference Warmup Experiments}
+\end{center}
+
+Consider the transport equation $u_t+au_x = 0$ on the 2-periodic domain $-1 \le x \le 1$ with initial data $u(0,x) = e^{-36x^2}$.
+
+Let $u_i^n$ be a gridfunction on the grid $x_i = -1+i h, h = 2/N, i = 1,\ldots,N,$ at time $t_n = kn$, and consider the schemes 
+\begin{eqnarray}
+u^{n+1}_i &=& u^n_i - a\lambda D_+ u^n_i, \label{up}\\
+u^{n+1}_i &=& u^n_i - a\lambda D_- u^n_i, \label{down} \\
+u^{n+1}_i &=& u^n_i - a\lambda D_0 u^n_i, \label{cent} \\
+u^{n+1}_i &=& \frac{u^n_{i+1}+u^n_{i-1}}{2} - a\lambda D_0 u^n_i, \label{lxf}
+\end{eqnarray}
+for $i = 1,\ldots,N$ and complemented with periodic boundary conditions $u^n_0 = u^n_N$ and $u^n_{N+1} = u^n_1$. Here $\lambda = k/h$ and    
+\begin{eqnarray*}
+D_+ w_{i} &=& \frac{w_{i+1}-w_{i}}{h}, \\
+D_- w_{i} &=& \frac{w_{i}-w_{i-1}}{h}, \\
+D_0 w_{i} &=& \frac{w_{i+1}-w_{i-1}}{2h}.
+\end{eqnarray*}
+are the standard finite difference operators. 
+
+\begin{enumerate}
+\item Take $a = 1$, $n=50$ and set $k \approx 0.5h $ and evolve the solution until time $t = 2$ for all of the schemes above. Hand in plots of the numerical solutions at the final time and the initial data. Which of the schemes appear to be stable?  
+\item Repeat but with $k \approx 0.5h^2 $. Hand in plots of the numerical solutions at the final time and the initial data.Now, which of the schemes appear to be stable?  
+\item  Next consider a ``random choice'' method. Precisely, when you are computing $u^{n+1}_i$ then (for each $i$) select, at random from a uniform distribution, the right hand side to be either (\ref{up}) or (\ref{down}). Use the stable scheme 75\% of the time (on average). Use $k\approx 0.5h$. Is this scheme stable? 
+\item For the above scheme and for a scheme where you randomly (50\% / 50\%) mix the stable scheme of (\ref{up}) and (\ref{down}) with (\ref{cent}) compute the maximum error at time $t=2$ (the exact solution is the initial data). In a log-log plot display the errors as a function of $h$ for $n = 10,11,\ldots, 1000$. In the same figure also plot $h^1$ and $h^2$. Note that (\ref{up}), (\ref{down}) and (\ref{lxf}) are first order in space and (\ref{cent}) is second order accurate in space and all of the schemes are first order accurate in time. What gives?   
+\end{enumerate}
+
+\end{document}
+
+
+
